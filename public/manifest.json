@@ -1,0 +1,7 @@
+{
+  "manifest_version": 3,
+  "name": "Why did i remove you",
+  "description": "An extension that will display the notes when needed, which you have specified while blocking or muting someone.",
+  "version": "1.0",
+  "content_scripts": [{ "js": ["index.js"], "css": ["index.css"],"matches": ["https://x.com/*"] }]
+}

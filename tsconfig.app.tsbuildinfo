@@ -1,0 +1,1 @@
+{"root":["./src/app.tsx","./src/main.tsx","./src/vite-env.d.ts","./src/components/addnote.tsx","./src/hooks/useblockbtnclick.tsx","./src/hooks/usedropdownobserver.tsx"],"version":"5.6.3"}
