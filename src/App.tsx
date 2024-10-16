@@ -1,10 +1,12 @@
 import { Fragment } from "react";
-import AddNote from "./components/AddNote";
+import AddNote from "./components/functional/AddNote/AddNote";
+import useNoteNeeded from "./hooks/useNoteNeeded";
 
 function App() {
+  const isNoteNeeded = useNoteNeeded();
   return (
     <Fragment>
-      <AddNote />
+      <AddNote isNoteNeeded={true} />
     </Fragment>
   );
 }
