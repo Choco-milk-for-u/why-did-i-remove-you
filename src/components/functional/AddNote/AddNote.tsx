@@ -6,15 +6,24 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
+import { useRef, useState } from "react";
 
 export default function AddNote({ isNoteNeeded }: { isNoteNeeded: boolean }) {
-  if (!isNoteNeeded) return null;
-
+  const [isOpen, setIsOpen] = useState(false);
+  const isFromInside = useRef<boolean>(false);
+  
+  const handleOpenChange = (open: boolean) => {
+    isFromInside.current = true;
+    setIsOpen(open);
+  };
+  if (isOpen !== isNoteNeeded && !isFromInside.current) {
+    setIsOpen(isNoteNeeded);
+  }
+  isFromInside.current = false;
   return (
-    <Dialog open={isNoteNeeded}>
+    <Dialog open={isOpen} onOpenChange={handleOpenChange}>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Would you like to add notes?</DialogTitle>
@@ -26,7 +35,7 @@ export default function AddNote({ isNoteNeeded }: { isNoteNeeded: boolean }) {
         </DialogHeader>
         <DialogFooter>
           <Textarea placeholder="Type your notes here." />
-          <Button>Send message</Button>
+          <Button>Save the note</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

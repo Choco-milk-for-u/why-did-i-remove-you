@@ -2,8 +2,13 @@ import { useSyncExternalStore } from "react";
 
 export default function useDomObserver(
   parent: Element | Node | null,
-  elChecker: () => Element | null
+  elChecker: () => any,
+  options: { observChildren: boolean; observDecendants: boolean } = {
+    observChildren: true,
+    observDecendants: true,
+  }
 ) {
+  const { observChildren, observDecendants } = options;
   function subscribeToDomChanges(callback: Function) {
     if (!parent) return () => {};
     const observer = new MutationObserver((mutationsList) => {
@@ -13,12 +18,16 @@ export default function useDomObserver(
         }
       }
     });
-    observer.observe(parent, { childList: true, subtree: true });
+    observer.observe(parent, {
+      childList: observChildren,
+      subtree: observDecendants,
+      attributes: !observDecendants || !observDecendants,
+    });
     return () => observer.disconnect();
   }
 
   function getDomState() {
-    return elChecker() ? true : false;
+    return elChecker();
   }
   return useSyncExternalStore(subscribeToDomChanges, getDomState);
 }

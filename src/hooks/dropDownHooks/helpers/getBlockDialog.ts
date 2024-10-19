@@ -1,7 +1,6 @@
 import { blockDialog } from "@/assets/static/hooks";
+import getByTestId from "./getByTestId";
 
 export default function getBlockDialog() {
-  const dialogId = `[data-testid="${blockDialog}"]`;
-  const dialog = document.querySelector(dialogId);
-  return dialog;
+  return getByTestId(blockDialog);
 }
